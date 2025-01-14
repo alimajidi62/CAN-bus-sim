@@ -1,0 +1,33 @@
+﻿LocalLib/
+packages/
+!LFL/build
+Release/
+Debug/
+
+build.cake
+.vs/
+*.user
+ipch
+LDLFSdk.VC.db
+LDLFSdk.VC.VC.opendb
+Winlay.VC.db
+*.aps
+Install/*.exe
+Temp
+LF/_site
+LF/api
+**/obj
+Artifacts
+UnitTest/TestFiles/RegressionTest
+
+# Ignore the tools directory, but not the config file (used to pin Cake version).
+tools/*
+build/*.cake
+build/Properties/launchSettings.json
+TestResults
+TempLayoutFoundation
+variables.config.json
+
+# Advanced Installer
+*-cache
+localPublishTarget
