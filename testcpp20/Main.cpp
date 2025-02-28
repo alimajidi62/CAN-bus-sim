@@ -111,10 +111,8 @@ int main()
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	cout << "\033[1;32m ****** Using Three-way comparison ****** \033[0m \n";
-	OperatorTest op1;
-	OperatorTest op2;
-	op1.x = 1; op1.y = 2;
-	op2.x = 3; op2.y = 4;
+	OperatorTest op1(1,2);
+	OperatorTest op2(3,4);
 	auto CompareResult = op2 <=> op1;
 	if (CompareResult == strong_ordering::less)
 		cout << "strong_ordering::less";

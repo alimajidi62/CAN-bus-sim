@@ -5,7 +5,7 @@ using namespace std;
 export class OperatorTest
 {
 public:
-	OperatorTest(): x(0), y(0)
+	OperatorTest(int x,int y): x(x), y(y)
 	{
 	}
 
