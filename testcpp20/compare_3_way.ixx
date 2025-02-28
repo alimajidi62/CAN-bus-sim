@@ -17,5 +17,13 @@ public:
 			return cmp;
 		return y <=> other.y;
 	}
+	bool operator==(const OperatorTest& other) const
+	{
+		return  y == other.y && x == other.x;
+	}
+	bool operator<(const OperatorTest& other)const // if there is no operator overload for "<" the compiler use <=> as 
+	{
+		return y < other.y;
+	}
 
 };

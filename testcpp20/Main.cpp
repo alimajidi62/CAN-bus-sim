@@ -113,6 +113,9 @@ int main()
 	cout << "\033[1;32m ****** Using Three-way comparison ****** \033[0m \n";
 	OperatorTest op1(1,2);
 	OperatorTest op2(3,4);
+	auto bigger = op2 > op1;
+	auto less = op2 < op1;
+	auto equail = op2 == op1;
 	auto CompareResult = op2 <=> op1;
 	if (CompareResult == strong_ordering::less)
 		cout << "strong_ordering::less";
