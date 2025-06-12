@@ -164,4 +164,12 @@ int main()
 	int n = sizeof(s) / sizeof(s[0]);
 	GreedyActivity(s, f, n);
 	cout <<"\n\n\n\n"<<"\033[1;34m ****** END ****** \033[0m \n";
+	int tempi = 3;
+	int tempi1 = 3;
+	int tempiee = 90;
+if (tempi=1,tempi1=2, tempiee <8000)
+{
+	int sss = 343;
+}
+
 }
