@@ -11,7 +11,6 @@
 #include <array>
 #include <optional>
 #include <thread>
-
 #include "TestTuple.h"
 using namespace std;
 import childmodule;
@@ -29,7 +28,7 @@ int main()
 {
 	{
 		cout << "\033[1;32m ****** OLD Test ****** \033[0m \n";
-		int* s11 = new int();
+		auto s11 = new int();
 		*s11 = 10;
 		delete s11;
 		s11 = nullptr;
@@ -40,15 +39,17 @@ int main()
 		}
 		CNDCSimpleVal<int> s;
 		s.GetDisplayValue();
-		int a = 1; int b = 12; string op;
-		auto my_lambda = [=]() -> double {
-			if (op == "sum") {
+		int a = 1;
+		int b = 12;
+		string op;
+		auto my_lambda = [=]() -> double
+		{
+			if (op == "sum")
+			{
 				return a + b;
 			}
-			else {
-				return (a + b) / 2.0;
-			}
-			};
+			return (a + b) / 2.0;
+		};
 		auto t = my_lambda();
 
 		cout << testFunctionInFunction();
@@ -60,18 +61,18 @@ int main()
 		s1 Punk2;
 		if (Punk1 == Punk2)
 			cout << "equal";
-		int* in1 = new int();
-		int* in2 = new int();
+		auto in1 = new int();
+		auto in2 = new int();
 		*in1 = 10;
 		*in2 = 20;
 		in1 = in2;
 		cout << *in2;
 		string I = "ss";
 		auto* p = new tetsTemplate(I, 1.2);
-		auto* p1 = new tetsTemplate(I, 1.3);;
+		auto* p1 = new tetsTemplate(I, 1.3);
 		delete p1;
 		p1 = NULL;
-		if (*p == (double)1.1)
+		if (*p == 1.1)
 		{
 			cout << endl << p->gcd(I, 1.23) << endl;
 		}
@@ -87,23 +88,25 @@ int main()
 		funcTemplate(10.25);
 		functinAddable("12.1");
 		string t1 = "s";
-		f4Template< 1, 2, 3>(1, 5, 6);              // NonTypePack are integers and args are integers
-		f4Template<'a', 'b'>(std::string("hello"), std::string("world")); // NonTypePack are characters and args are strings
+		f4Template<1, 2, 3>(1, 5, 6); // NonTypePack are integers and args are integers
+		f4Template<'a', 'b'>(std::string("hello"), std::string("world"));
+		// NonTypePack are characters and args are strings
 		cout << "\033[1;32m ****** OLD Test ****** \033[0m \n";
 	}
 	cout << "\033[1;32m ****** Using Tuple ****** \033[0m \n";
 	auto* test_tuple = new TestTuple();
 	cout << "\033[1;32m ********* Using Module *********\033[0m \n";
-	moduleTestClass* localAdd = new moduleTestClass(1, 2, 3);
+	auto localAdd = new moduleTestClass(1, 2, 3);
 	cout << "result of function add=" << localAdd->addMudule(1, 2) << endl;
 	cout << "Result module in cpp" << AddIncpp(2, 2222) << endl;
 	cout << "\033[1;32m ****** Using Coroutines ****** \033[0m \n";
 	foo1_coroutine();
 	foo2_coroutine();
-
-	while (!task_queue_coroutine.empty()) {
+	while (!task_queue_coroutine.empty())
+	{
 		auto task = task_queue_coroutine.front();
-		if (!task()) {
+		if (!task())
+		{
 			task_queue_coroutine.push(task);
 		}
 		task_queue_coroutine.pop();
@@ -111,8 +114,8 @@ int main()
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	cout << "\033[1;32m ****** Using Three-way comparison ****** \033[0m \n";
-	OperatorTest op1(1,2);
-	OperatorTest op2(3,4);
+	OperatorTest op1(1, 2);
+	OperatorTest op2(3, 4);
 	auto bigger = op2 > op1;
 	auto less = op2 < op1;
 	auto equail = op2 == op1;
@@ -129,14 +132,16 @@ int main()
 	ConstInDifferentUsage constInDifferentUsage;
 	constInDifferentUsage.NotConstFunction();
 	int NonconstInt1 = 12;
-	const int  ConstOut/*=11; ConstOut  can not assigned after initial const variable*/ = constInDifferentUsage.ConstInConstOut(NonconstInt1);
+	const int ConstOut/*=11; ConstOut  can not assigned after initial const variable*/ = constInDifferentUsage.
+		ConstInConstOut(NonconstInt1);
 	//ConstOut++;
 	cout << ConstOut << endl;
 	cout << "\033[1;32m ****** Using header file in Module ****** \033[0m \n";
 	TestClassInHeaderInModule();
 	cout << "\033[1;32m ****** Test Variant ****** \033[0m \n";
 	TestVarient();
-	unordered_map</*function name*/string, vector<pair</*SM version*/string, pair<bool, std::optional<int>>>>> m_sMgapMatrix;
+	unordered_map</*function name*/string, vector<pair</*SM version*/string, pair<bool, std::optional<int>>>>>
+		m_sMgapMatrix;
 	m_sMgapMatrix.clear();
 	vector<pair</*SM version*/string, pair<bool, std::optional<int>>>> temp;
 	temp.push_back(make_pair("Classic", make_pair(true, 10)));
@@ -159,10 +164,9 @@ int main()
 
 
 	cout << "\033[1;32m ****** Greedy Activity ****** \033[0m \n";
-	int s[] = { 1, 3, 0, 5, 8, 5 };
-	int f[] = { 2, 4, 6, 7, 9, 9 };
+	int s[] = {1, 3, 0, 5, 8, 5};
+	int f[] = {2, 4, 6, 7, 9, 9};
 	int n = sizeof(s) / sizeof(s[0]);
 	GreedyActivity(s, f, n);
-	cout <<"\n\n\n\n"<<"\033[1;34m ****** END ****** \033[0m \n";
-
+	cout << "\n\n\n\n" << "\033[1;34m ****** END ****** \033[0m \n";
 }
