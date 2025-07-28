@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "name": "C++20 Test Features",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.generator": "Visual Studio 17 2022",
+        "cmake.platform": "x64",
+        "cmake.configureOnOpen": true,
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+        "C_Cpp.default.cppStandard": "c++20",
+        "C_Cpp.default.compilerPath": "cl.exe",
+        "files.associations": {
+            "*.ixx": "cpp",
+            "*.cppm": "cpp"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.cpptools",
+            "ms-vscode.cmake-tools",
+            "ms-vscode.cpptools-extension-pack"
+        ]
+    }
+}
