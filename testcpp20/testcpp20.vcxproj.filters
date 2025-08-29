@@ -57,6 +57,9 @@
     <ClCompile Include="GreedyActivity.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SemaphoreTest.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestTuple.h">

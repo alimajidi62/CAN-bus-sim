@@ -24,6 +24,7 @@ import VariantTest;
 import STDExecution;
 import AtomicM;
 import GreedyActivity;
+import SemaphoreTest;
 int main()
 {
 	{
@@ -162,6 +163,10 @@ int main()
 	cout << "\033[1;32m ****** Test std::atomic ****** \033[0m \n";
 	AtomicM();
 
+	cout << "\033[1;32m ****** Test C++20 Semaphores ****** \033[0m \n";
+	demonstrate_semaphore_vs_mutex();
+	demonstrate_binary_semaphore();
+	semaphore_performance_test();
 
 	cout << "\033[1;32m ****** Greedy Activity ****** \033[0m \n";
 	int s[] = {1, 3, 0, 5, 8, 5};
