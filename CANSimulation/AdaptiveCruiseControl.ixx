@@ -568,10 +568,10 @@ export namespace AdaptiveCruiseControl {
                         
                         switch (static_cast<RoadCondition>(roadCond)) {
                             case RoadCondition::FLAT: roadCondition = "Flat"; break;
-                            case RoadCondition::UPHILL_MILD: roadCondition = "Uphill↗"; break;
-                            case RoadCondition::UPHILL_STEEP: roadCondition = "Steep↗↗"; break;
-                            case RoadCondition::DOWNHILL_MILD: roadCondition = "Downhill↘"; break;
-                            case RoadCondition::DOWNHILL_STEEP: roadCondition = "Steep↘↘"; break;
+                            case RoadCondition::UPHILL_MILD: roadCondition = "Uphill"; break;
+                            case RoadCondition::UPHILL_STEEP: roadCondition = "Steep"; break;
+                            case RoadCondition::DOWNHILL_MILD: roadCondition = "Downhill"; break;
+                            case RoadCondition::DOWNHILL_STEEP: roadCondition = "Steep"; break;
                         }
                     }
                     break;
@@ -599,15 +599,15 @@ export namespace AdaptiveCruiseControl {
         
         void printStatus() {
             cout << "\n" << string(80, '=') << endl;
-            cout << "                    🚗 ADAPTIVE CRUISE CONTROL DASHBOARD 🚗" << endl;
+            cout << "                     ADAPTIVE CRUISE CONTROL DASHBOARD " << endl;
             cout << string(80, '=') << endl;
             cout << fixed << setprecision(1);
-            cout << "│ Current Speed: " << setw(6) << currentSpeed << " km/h";
-            cout << " │ Target Speed: " << setw(6) << targetSpeed << " km/h";
-            cout << " │ Road: " << setw(10) << roadCondition << " │" << endl;
-            cout << "│ Throttle Pos: " << setw(6) << throttlePosition << " %   ";
-            cout << " │ Cruise Mode:  " << setw(6) << (cruiseActive ? "ON" : "OFF") << "     ";
-            cout << " │ PI Integral: " << setw(7) << setprecision(2) << integralSum << " │" << endl;
+            cout << " Current Speed: " << setw(6) << currentSpeed << " km/h";
+            cout << "  Target Speed: " << setw(6) << targetSpeed << " km/h";
+            cout << " Road: " << setw(10) << roadCondition << " " << endl;
+            cout << " Throttle Pos: " << setw(6) << throttlePosition << " %   ";
+            cout << "  Cruise Mode:  " << setw(6) << (cruiseActive ? "ON" : "OFF") << "     ";
+            cout << "  PI Integral: " << setw(7) << setprecision(2) << integralSum << " " << endl;
             cout << string(80, '=') << endl;
         }
     };
@@ -634,65 +634,65 @@ export namespace AdaptiveCruiseControl {
             vehicle = make_unique<VehicleSimulator>(canBus, 0x20, 1500.0); // 1500kg vehicle
             dashboard = make_unique<DashboardDisplay>(canBus, 0x30);
             
-            cout << "\n🚗 Adaptive Cruise Control with PI Speed Governor Initialized 🚗" << endl;
-            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\n Adaptive Cruise Control with PI Speed Governor Initialized " << endl;
+            cout << "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq" << endl;
         }
         
         void runScenario() {
-            cout << "\n🎯 SCENARIO: Maintaining 80 km/h on Various Road Conditions" << endl;
+            cout << "\n SCENARIO: Maintaining 80 km/h on Various Road Conditions" << endl;
             cout << "This demonstrates how a PI controller maintains constant speed despite changing load conditions." << endl;
             
             // Phase 1: Start on flat road
-            cout << "\n📍 Phase 1: Starting cruise control on flat road..." << endl;
+            cout << "\n Phase 1: Starting cruise control on flat road..." << endl;
             ecu->setCruiseSpeed(80.0); // Set cruise control to 80 km/h
             this_thread::sleep_for(3s);
             dashboard->printStatus();
             
             // Phase 2: Mild uphill
-            cout << "\n📍 Phase 2: Encountering mild uphill (3% grade)..." << endl;
+            cout << "\n Phase 2: Encountering mild uphill (3% grade)..." << endl;
             vehicle->changeRoadCondition(RoadCondition::UPHILL_MILD);
             this_thread::sleep_for(4s);
             dashboard->printStatus();
             
             // Phase 3: Steep uphill
-            cout << "\n📍 Phase 3: Steep uphill climb (8% grade)..." << endl;
+            cout << "\n Phase 3: Steep uphill climb (8% grade)..." << endl;
             vehicle->changeRoadCondition(RoadCondition::UPHILL_STEEP);
             this_thread::sleep_for(5s);
             dashboard->printStatus();
             
             // Phase 4: Back to flat
-            cout << "\n📍 Phase 4: Returning to flat road..." << endl;
+            cout << "\n Phase 4: Returning to flat road..." << endl;
             vehicle->changeRoadCondition(RoadCondition::FLAT);
             this_thread::sleep_for(3s);
             dashboard->printStatus();
             
             // Phase 5: Downhill
-            cout << "\n📍 Phase 5: Mild downhill (3% grade)..." << endl;
+            cout << "\n Phase 5: Mild downhill (3% grade)..." << endl;
             vehicle->changeRoadCondition(RoadCondition::DOWNHILL_MILD);
             this_thread::sleep_for(4s);
             dashboard->printStatus();
             
             // Phase 6: Steep downhill
-            cout << "\n📍 Phase 6: Steep downhill (8% grade)..." << endl;
+            cout << "\n Phase 6: Steep downhill (8% grade)..." << endl;
             vehicle->changeRoadCondition(RoadCondition::DOWNHILL_STEEP);
             this_thread::sleep_for(4s);
             dashboard->printStatus();
             
             // Phase 7: Final flat section
-            cout << "\n📍 Phase 7: Final flat section - demonstrating steady state..." << endl;
+            cout << "\n Phase 7: Final flat section - demonstrating steady state..." << endl;
             vehicle->changeRoadCondition(RoadCondition::FLAT);
             this_thread::sleep_for(3s);
             dashboard->printStatus();
             
-            cout << "\n✅ Scenario Complete!" << endl;
-            cout << "\n📊 PERFORMANCE ANALYSIS:" << endl;
+            cout << "\n Scenario Complete!" << endl;
+            cout << "\n PERFORMANCE ANALYSIS:" << endl;
             cout << "• The PI controller successfully maintained target speed across all road conditions" << endl;
             cout << "• Throttle position automatically adjusted to compensate for changing load" << endl;
             cout << "• Integral term accumulated to eliminate steady-state error" << endl;
             cout << "• System demonstrated robust performance on slopes and flat roads" << endl;
             
             // Demonstrate PI tuning
-            cout << "\n🔧 BONUS: Demonstrating PI Gain Tuning..." << endl;
+            cout << "\n BONUS: Demonstrating PI Gain Tuning..." << endl;
             cout << "Changing to aggressive gains (High Kp, Low Ki)..." << endl;
             ecu->setPIGains(5.0, 0.05);
             vehicle->changeRoadCondition(RoadCondition::UPHILL_MILD);
@@ -705,12 +705,12 @@ export namespace AdaptiveCruiseControl {
             dashboard->printStatus();
             
             // Clean shutdown
-            cout << "\n🔄 Shutting down cruise control..." << endl;
+            cout << "\n Shutting down cruise control..." << endl;
             ecu->disableCruiseControl();
             this_thread::sleep_for(1s);
             
-            cout << "\n🏁 Adaptive Cruise Control Demonstration Complete!" << endl;
-            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\n Adaptive Cruise Control Demonstration Complete!" << endl;
+            cout << "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq" << endl;
         }
         
         ~AdaptiveCruiseControlScenario() {
