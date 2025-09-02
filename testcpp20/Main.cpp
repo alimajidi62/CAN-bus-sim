@@ -189,6 +189,7 @@ int main()
 	
 	// Run the basic CAN demo by default
 	CANDemo::runBasicCANDemo();
+	CANDemo::IndustrialCANDemo::runFactoryAutomationDemo();
 	
 	cout << "\n\nFor more detailed learning, uncomment the other demo functions in Main.cpp:" << endl;
 	cout << "// CANDemo::runArbitrationDemo();" << endl;

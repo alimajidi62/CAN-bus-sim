@@ -247,7 +247,7 @@ export namespace CANDemo {
             cout << "- Simulation will run for 10 seconds" << endl;
 
             // Let simulation run
-            this_thread::sleep_for(10s);
+            this_thread::sleep_for(100s);
 
             cout << "\nStopping simulation..." << endl;
             tempSensor1->stop();
