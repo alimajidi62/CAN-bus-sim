@@ -652,4 +652,4 @@ Each module demonstrates specific C++20 features:
 
 ---
 
-This project serves as both a learning resource and a practical reference for implementing C++20 features in real-world applications.
+This project serves as both a learning resource and a practical reference for implementing C++20 features in real-world applications.   
