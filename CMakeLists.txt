@@ -48,6 +48,7 @@ set(MODULE_SOURCES
     "${SRC_DIR}/SemaphoreTest.ixx"
     "${SRC_DIR}/CANBusSimulation.ixx"
     "${SRC_DIR}/CANBusDemo.ixx"
+    "${SRC_DIR}/AdaptiveCruiseControl.ixx"
 )
 
 # Define implementation files (.cpp)
