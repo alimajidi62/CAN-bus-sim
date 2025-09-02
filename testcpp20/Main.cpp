@@ -25,6 +25,8 @@ import STDExecution;
 import AtomicM;
 import GreedyActivity;
 import SemaphoreTest;
+import CANBusSimulation;
+import CANBusDemo;
 int main()
 {
 	{
@@ -164,14 +166,35 @@ int main()
 	AtomicM();
 
 	cout << "\033[1;32m ****** Test C++20 Semaphores ****** \033[0m \n";
-	demonstrate_semaphore_vs_mutex();
-	demonstrate_binary_semaphore();
-	semaphore_performance_test();
+	//demonstrate_semaphore_vs_mutex();
+	//demonstrate_binary_semaphore();
+	//semaphore_performance_test();
 
 	cout << "\033[1;32m ****** Greedy Activity ****** \033[0m \n";
 	int s[] = {1, 3, 0, 5, 8, 5};
 	int f[] = {2, 4, 6, 7, 9, 9};
 	int n = sizeof(s) / sizeof(s[0]);
 	GreedyActivity(s, f, n);
+
+	cout << "\033[1;32m ****** CAN Bus Simulation Tutorial ****** \033[0m \n";
+	cout << "\nWelcome to the comprehensive CAN Bus learning system!" << endl;
+	cout << "This simulation will teach you everything about CAN bus communication." << endl;
+	cout << "\nChoose a demonstration:" << endl;
+	cout << "1. Basic CAN Demo (Quick)" << endl;
+	cout << "2. CAN Arbitration Demo" << endl;
+	cout << "3. Automotive CAN Demo" << endl;
+	cout << "4. Industrial CAN Demo" << endl;
+	cout << "5. Full Interactive Tutorial" << endl;
+	cout << "\nRunning Basic CAN Demo..." << endl;
+	
+	// Run the basic CAN demo by default
+	CANDemo::runBasicCANDemo();
+	
+	cout << "\n\nFor more detailed learning, uncomment the other demo functions in Main.cpp:" << endl;
+	cout << "// CANDemo::runArbitrationDemo();" << endl;
+	cout << "// CANDemo::runAutomotiveDemo();" << endl;
+	cout << "// CANDemo::runIndustrialDemo();" << endl;
+	cout << "// CANDemo::runFullTutorial();" << endl;
+
 	cout << "\n\n\n\n" << "\033[1;34m ****** END ****** \033[0m \n";
 }

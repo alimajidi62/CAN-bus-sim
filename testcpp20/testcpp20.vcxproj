@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AtomicM.ixx" />
+    <ClCompile Include="CANBusDemo.ixx" />
+    <ClCompile Include="CANBusSimulation.ixx" />
     <ClCompile Include="compare_3_way.ixx" />
     <ClCompile Include="ConstTest.ixx" />
     <ClCompile Include="CoroutineTest.ixx" />

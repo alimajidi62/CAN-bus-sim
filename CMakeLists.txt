@@ -46,6 +46,8 @@ set(MODULE_SOURCES
     "${SRC_DIR}/AtomicM.ixx"
     "${SRC_DIR}/GreedyActivity.ixx"
     "${SRC_DIR}/SemaphoreTest.ixx"
+    "${SRC_DIR}/CANBusSimulation.ixx"
+    "${SRC_DIR}/CANBusDemo.ixx"
 )
 
 # Define implementation files (.cpp)

@@ -60,6 +60,12 @@
     <ClCompile Include="SemaphoreTest.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CANBusDemo.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CANBusSimulation.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestTuple.h">
