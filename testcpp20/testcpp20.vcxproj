@@ -133,10 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdaptiveCruiseControl.ixx" />
     <ClCompile Include="AtomicM.ixx" />
-    <ClCompile Include="CANBusDemo.ixx" />
-    <ClCompile Include="CANBusSimulation.ixx" />
     <ClCompile Include="compare_3_way.ixx" />
     <ClCompile Include="ConstTest.ixx" />
     <ClCompile Include="CoroutineTest.ixx" />
