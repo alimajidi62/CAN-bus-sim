@@ -349,12 +349,178 @@ export namespace CANDemo {
         CANBusLearningSystem::demonstrateArbitration();
     }
 
+    // ========================================
+    // HEADLIGHT CONTROL DEMO
+    // ========================================
+    
+    class HeadlightControlDemo {
+    private:
+        static constexpr uint32_t HEADLIGHT_COMMAND_ID = 0x200;
+        static constexpr uint32_t HEADLIGHT_STATUS_ID = 0x201;
+        static constexpr uint32_t USER_INPUT_ID = 0x202;
+
+        enum class HeadlightState {
+            OFF = 0,
+            ON = 1,
+            AUTO = 2
+        };
+
+    public:
+        static void runHeadlightDemo() {
+            cout << "\n" << string(60, '=') << endl;
+            cout << "    HEADLIGHT CONTROL SYSTEM DEMO" << endl;
+            cout << string(60, '=') << endl;
+            
+            cout << "\nThis demo simulates automotive headlight control via CAN bus:" << endl;
+            cout << "1. User dashboard switch sends command" << endl;
+            cout << "2. ECU processes the command" << endl;
+            cout << "3. ECU sends control signal to headlight controller" << endl;
+            cout << "4. Headlight controller turns lights on/off" << endl;
+            cout << "5. Status feedback via CAN bus" << endl;
+
+            // Create CAN bus
+            auto canBus = make_shared<CANBus>();
+            canBus->setBitRate(500000);
+
+            cout << "\n*** Creating headlight control system..." << endl;
+            cout << "* CAN Bus initialized (500 kbps)" << endl;
+            cout << "* User Input Node (0x10)" << endl;
+            cout << "* ECU Node (0x20)" << endl;
+            cout << "* Headlight Controller Node (0x30)" << endl;
+
+            // Simulate user commands
+            simulateUserCommands(canBus);
+        }
+
+    private:
+        static void simulateUserCommands(shared_ptr<CANBus> canBus) {
+            cout << "\n*** SIMULATING USER COMMANDS:" << endl;
+            cout << "============================================" << endl;
+
+            // Simulate different scenarios
+            vector<pair<HeadlightState, string>> scenarios = {
+                {HeadlightState::ON, "Driver turns headlights ON"},
+                {HeadlightState::OFF, "Driver turns headlights OFF"},
+                {HeadlightState::AUTO, "Driver sets to AUTO mode"},
+                {HeadlightState::ON, "Driver manually turns ON again"}
+            };
+
+            bool currentLightState = false;
+
+            for (size_t i = 0; i < scenarios.size(); i++) {
+                auto [command, description] = scenarios[i];
+                
+                cout << "\n--- Scenario " << (i + 1) << ": " << description << " ---" << endl;
+                
+                // 1. User input simulation
+                sendUserCommand(canBus, command);
+                this_thread::sleep_for(200ms);
+                
+                // 2. ECU processing simulation
+                processECUCommand(canBus, command);
+                this_thread::sleep_for(200ms);
+                
+                // 3. Headlight controller response
+                currentLightState = controlHeadlights(canBus, command, currentLightState);
+                this_thread::sleep_for(200ms);
+                
+                // 4. Status feedback
+                sendStatusFeedback(canBus, command, currentLightState);
+                
+                cout << "* Command processed successfully" << endl;
+                this_thread::sleep_for(1s);
+            }
+
+            cout << "\n*** DEMO COMPLETE!" << endl;
+            cout << "Key learning points:" << endl;
+            cout << "• CAN messages carry specific data (command types, status)" << endl;
+            cout << "• Multiple nodes communicate via shared bus" << endl;
+            cout << "• Real-time feedback ensures system reliability" << endl;
+            cout << "• Message IDs determine priority and routing" << endl;
+        }
+
+        static void sendUserCommand(shared_ptr<CANBus> canBus, HeadlightState command) {
+            vector<uint8_t> data = {static_cast<uint8_t>(command)};
+            CANMessage msg(USER_INPUT_ID, data);
+            
+            canBus->transmitMessage(msg);
+            
+            string commandStr;
+            switch (command) {
+                case HeadlightState::OFF: commandStr = "OFF"; break;
+                case HeadlightState::ON: commandStr = "ON"; break;
+                case HeadlightState::AUTO: commandStr = "AUTO"; break;
+            }
+            
+            cout << "[DASHBOARD] *** User input: " << commandStr << " (CAN ID: 0x" 
+                 << hex << msg.id << dec << ")" << endl;
+        }
+
+        static void processECUCommand(shared_ptr<CANBus> canBus, HeadlightState command) {
+            cout << "[ECU] *** Processing command..." << endl;
+            
+            // ECU processes the user input and sends control command
+            vector<uint8_t> data = {static_cast<uint8_t>(command), 0xFF}; // Command validation flag
+            CANMessage msg(HEADLIGHT_COMMAND_ID, data);
+            
+            canBus->transmitMessage(msg);
+            cout << "[ECU] >>> Sending control command to headlight controller (CAN ID: 0x" 
+                 << hex << msg.id << dec << ")" << endl;
+        }
+
+        static bool controlHeadlights(shared_ptr<CANBus> canBus, HeadlightState command, bool currentState) {
+            bool newState = currentState;
+            
+            switch (command) {
+                case HeadlightState::OFF:
+                    newState = false;
+                    cout << "[HEADLIGHT_CTRL] *** Turning headlights OFF" << endl;
+                    break;
+                case HeadlightState::ON:
+                    newState = true;
+                    cout << "[HEADLIGHT_CTRL] *** Turning headlights ON" << endl;
+                    break;
+                case HeadlightState::AUTO:
+                    // Simulate auto mode (let's say it's dark, so turn on)
+                    newState = true;
+                    cout << "[HEADLIGHT_CTRL] *** AUTO mode: Dark detected, turning ON" << endl;
+                    break;
+            }
+            
+            // Show visual status
+            if (newState) {
+                cout << "                    *** HEADLIGHTS ON ***" << endl;
+            } else {
+                cout << "                    --- HEADLIGHTS OFF ---" << endl;
+            }
+            
+            return newState;
+        }
+
+        static void sendStatusFeedback(shared_ptr<CANBus> canBus, HeadlightState mode, bool lightState) {
+            vector<uint8_t> data = {
+                static_cast<uint8_t>(mode),
+                static_cast<uint8_t>(lightState ? 1 : 0),
+                0xAA  // Status validation flag
+            };
+            CANMessage msg(HEADLIGHT_STATUS_ID, data);
+            
+            canBus->transmitMessage(msg);
+            cout << "[HEADLIGHT_CTRL] <<< Status update sent (CAN ID: 0x" 
+                 << hex << msg.id << dec << ")" << endl;
+        }
+    };
+
     void runAutomotiveDemo() {
         AutomotiveCANDemo::runEngineManagementDemo();
     }
 
     void runIndustrialDemo() {
         IndustrialCANDemo::runFactoryAutomationDemo();
+    }
+
+    void runHeadlightDemo() {
+        HeadlightControlDemo::runHeadlightDemo();
     }
 
     void runFullTutorial() {

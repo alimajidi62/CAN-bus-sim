@@ -19,14 +19,21 @@ int main()
 	cout << "4. Industrial CAN Demo" << endl;
 	cout << "5. Full Interactive Tutorial" << endl;
 	cout << "6. Adaptive Cruise Control with PI Speed Governor" << endl;
+	cout << "7. Headlight Control System Demo (NEW!)" << endl;
 	cout << "\nRunning Basic CAN Demo..." << endl;
 
 	// Run the basic CAN demo by default
-	CANDemo::runBasicCANDemo();
+	//CANDemo::runBasicCANDemo();
 	//CANDemo::IndustrialCANDemo::runFactoryAutomationDemo();
 
-	cout << "\n\033[1;33m ****** NEW: Adaptive Cruise Control with PI Speed Governor ****** \033[0m \n";
-	cout << "Running advanced automotive scenario..." << endl;
+	cout << "\n\033[1;33m ****** NEW: Simple Headlight Control Demo ****** \033[0m \n";
+	cout << "Running simple automotive headlight control scenario..." << endl;
+
+	// Run the new Headlight Control demo
+	CANDemo::runHeadlightDemo();
+
+	cout << "\n\033[1;33m ****** Adaptive Cruise Control (Currently Disabled) ****** \033[0m \n";
+	cout << "The cruise control demo is currently commented out due to speed control issues." << endl;
 
 	// Run the new Adaptive Cruise Control scenario
 	//AdaptiveCruiseControl::AdaptiveCruiseControlScenario cruiseControlDemo;

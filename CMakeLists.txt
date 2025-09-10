@@ -46,14 +46,14 @@ set(MODULE_SOURCES
     "${SRC_DIR}/AtomicM.ixx"
     "${SRC_DIR}/GreedyActivity.ixx"
     "${SRC_DIR}/SemaphoreTest.ixx"
-    "${SRC_DIR}/CANBusSimulation.ixx"
-    "${SRC_DIR}/CANBusDemo.ixx"
-    "${SRC_DIR}/AdaptiveCruiseControl.ixx"
+    "${CMAKE_SOURCE_DIR}/CANSimulation/CANBusSimulation.ixx"
+    "${CMAKE_SOURCE_DIR}/CANSimulation/CANBusDemo.ixx"
+    "${CMAKE_SOURCE_DIR}/CANSimulation/AdaptiveCruiseControl.ixx"
 )
 
 # Define implementation files (.cpp)
 set(IMPLEMENTATION_SOURCES
-    "${SRC_DIR}/Main.cpp"
+    "${CMAKE_SOURCE_DIR}/CANSimulation/CANSimulation.cpp"
     "${SRC_DIR}/TestTuple.cpp"
     "${SRC_DIR}/TestCalssInModule.cpp"
 )
