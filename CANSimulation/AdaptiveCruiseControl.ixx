@@ -2,6 +2,9 @@
 // Scenario: "Adaptive Cruise Control with PI Speed Governor"
 // This module simulates a real-world automotive scenario where a PI controller
 // maintains constant vehicle speed regardless of road conditions (slopes, flat roads)
+// by adjusting the throttle position via CAN bus messages.
+// The scenario includes a vehicle dynamics simulator, an engine control unit (ECU)
+// with a PI controller, and a dashboard display node.
 
 module;
 
