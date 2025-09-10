@@ -22,15 +22,15 @@ int main()
 	cout << "\nRunning Basic CAN Demo..." << endl;
 
 	// Run the basic CAN demo by default
-	//CANDemo::runBasicCANDemo();
+	CANDemo::runBasicCANDemo();
 	//CANDemo::IndustrialCANDemo::runFactoryAutomationDemo();
 
 	cout << "\n\033[1;33m ****** NEW: Adaptive Cruise Control with PI Speed Governor ****** \033[0m \n";
 	cout << "Running advanced automotive scenario..." << endl;
 
 	// Run the new Adaptive Cruise Control scenario
-	AdaptiveCruiseControl::AdaptiveCruiseControlScenario cruiseControlDemo;
-	cruiseControlDemo.runScenario();
+	//AdaptiveCruiseControl::AdaptiveCruiseControlScenario cruiseControlDemo;
+	//cruiseControlDemo.runScenario();
 
 	cout << "\n\nFor more detailed learning, uncomment the other demo functions in Main.cpp:" << endl;
 	cout << "// CANDemo::runArbitrationDemo();" << endl;
