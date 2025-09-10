@@ -433,10 +433,10 @@ export namespace CANDemo {
 
             cout << "\n*** DEMO COMPLETE!" << endl;
             cout << "Key learning points:" << endl;
-            cout << "• CAN messages carry specific data (command types, status)" << endl;
-            cout << "• Multiple nodes communicate via shared bus" << endl;
-            cout << "• Real-time feedback ensures system reliability" << endl;
-            cout << "• Message IDs determine priority and routing" << endl;
+            cout << "* CAN messages carry specific data (command types, status)" << endl;
+            cout << "* Multiple nodes communicate via shared bus" << endl;
+            cout << "* Real-time feedback ensures system reliability" << endl;
+            cout << "* Message IDs determine priority and routing" << endl;
         }
 
         static void sendUserCommand(shared_ptr<CANBus> canBus, HeadlightState command) {
