@@ -1,39 +1,39 @@
+// ...existing code...
+#include <iostream>
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <set>
+#include <queue>
 using namespace std;
 
 class FoodRatings {
-    // Map food name to its cuisine
-    unordered_map<string, string> foodToCuisine;
-    // Map food name to its rating
-    unordered_map<string, int> foodToRating;
-    // For each cuisine, store foods sorted by (rating desc, name asc)
-    unordered_map<string, set<pair<int, string>>> cuisineFoods;
+    std::unordered_map<std::string, std::string> foodToCuisine;
+    std::unordered_map<std::string, int> foodToRating;
+    // For each cuisine, a max-heap of (rating, name)
+    std::unordered_map<std::string, std::priority_queue<std::pair<int, std::string>>> cuisineHeap;
 
 public:
-    FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
+    FoodRatings(std::vector<std::string>& foods, std::vector<std::string>& cuisines, std::vector<int>& ratings) {
         int n = foods.size();
         for (int i = 0; i < n; ++i) {
             foodToCuisine[foods[i]] = cuisines[i];
             foodToRating[foods[i]] = ratings[i];
-            cuisineFoods[cuisines[i]].insert({-ratings[i], foods[i]});
+            cuisineHeap[cuisines[i]].push({ratings[i], foods[i]});
         }
     }
-    
-    void changeRating(string food, int newRating) {
-        string cuisine = foodToCuisine[food];
-        int oldRating = foodToRating[food];
-        // Remove old entry
-        cuisineFoods[cuisine].erase({-oldRating, food});
-        // Insert new entry
-        cuisineFoods[cuisine].insert({-newRating, food});
+
+    void changeRating(std::string food, int newRating) {
+        std::string cuisine = foodToCuisine[food];
         foodToRating[food] = newRating;
+        cuisineHeap[cuisine].push({newRating, food});
     }
-    
-    string highestRated(string cuisine) {
-        // The first element in the set is the highest rated (rating desc, name asc)
-        return cuisineFoods[cuisine].begin()->second;
+
+    std::string highestRated(std::string cuisine) {
+        auto& heap = cuisineHeap[cuisine];
+        while (true) {
+            auto [rating, name] = heap.top();
+            if (foodToRating[name] == rating) return name;
+            heap.pop(); // Remove outdated entry
+        }
     }
 };
