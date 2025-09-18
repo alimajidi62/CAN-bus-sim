@@ -60,10 +60,7 @@
     <ClCompile Include="SemaphoreTest.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CANBusDemo.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CANBusSimulation.ixx">
+    <ClCompile Include="FoodRating.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

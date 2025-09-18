@@ -137,6 +137,7 @@
     <ClCompile Include="compare_3_way.ixx" />
     <ClCompile Include="ConstTest.ixx" />
     <ClCompile Include="CoroutineTest.ixx" />
+    <ClCompile Include="FoodRating.cpp" />
     <ClCompile Include="GreedyActivity.ixx" />
     <ClCompile Include="OldTestAndTemplate.ixx" />
     <ClCompile Include="parentModule.ixx" />

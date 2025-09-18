@@ -12,6 +12,7 @@
 #include <optional>
 #include <thread>
 #include "TestTuple.h"
+#include "FoodRating.cpp"
 using namespace std;
 import childmodule;
 import testIncpp;
@@ -174,6 +175,20 @@ int main()
 	int n = sizeof(s) / sizeof(s[0]);
 	GreedyActivity(s, f, n);
 
+
+
+	std::vector<std::string> foods = {"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"};
+    std::vector<std::string> cuisines = {"korean", "japanese", "japanese", "greek", "japanese", "korean"};
+    std::vector<int> ratings = {9, 12, 8, 15, 14, 7};
+
+    FoodRatings foodRatings(foods, cuisines, ratings);
+
+    std::cout << foodRatings.highestRated("korean") << std::endl;    // kimchi
+    std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
+    foodRatings.changeRating("sushi", 16);
+    std::cout << foodRatings.highestRated("japanese") << std::endl;  // sushi
+    foodRatings.changeRating("ramen", 16);
+    std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
 
 	cout << "\n\n\n\n" << "\033[1;34m ****** END ****** \033[0m \n";
 }
