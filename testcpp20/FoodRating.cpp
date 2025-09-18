@@ -1,16 +1,22 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <set>
+#include <queue>
 using namespace std;
 
+struct FoodEntry {
+    int rating;
+    string name;
+    bool operator<(const FoodEntry& other) const {
+        if (rating != other.rating) return rating < other.rating; // max-heap by rating
+        return name > other.name; // min-heap by name for ties
+    }
+};
+
 class FoodRatings {
-    // Map food name to its cuisine
     unordered_map<string, string> foodToCuisine;
-    // Map food name to its rating
     unordered_map<string, int> foodToRating;
-    // For each cuisine, store foods sorted by (rating desc, name asc)
-    unordered_map<string, set<pair<int, string>>> cuisineFoods;
+    unordered_map<string, priority_queue<FoodEntry>> cuisineHeap;
 
 public:
     FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
@@ -18,22 +24,22 @@ public:
         for (int i = 0; i < n; ++i) {
             foodToCuisine[foods[i]] = cuisines[i];
             foodToRating[foods[i]] = ratings[i];
-            cuisineFoods[cuisines[i]].insert({-ratings[i], foods[i]});
+            cuisineHeap[cuisines[i]].push({ ratings[i], foods[i] });
         }
     }
-    
+
     void changeRating(string food, int newRating) {
         string cuisine = foodToCuisine[food];
-        int oldRating = foodToRating[food];
-        // Remove old entry
-        cuisineFoods[cuisine].erase({-oldRating, food});
-        // Insert new entry
-        cuisineFoods[cuisine].insert({-newRating, food});
         foodToRating[food] = newRating;
+        cuisineHeap[cuisine].push({ newRating, food });
     }
-    
+
     string highestRated(string cuisine) {
-        // The first element in the set is the highest rated (rating desc, name asc)
-        return cuisineFoods[cuisine].begin()->second;
+        auto& heap = cuisineHeap[cuisine];
+        while (true) {
+            FoodEntry top = heap.top();
+            if (foodToRating[top.name] == top.rating) return top.name;
+            heap.pop(); // Remove outdated entry
+        }
     }
 };
