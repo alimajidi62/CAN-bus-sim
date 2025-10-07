@@ -34,7 +34,7 @@ public:
     
     string highestRated(string cuisine) {
         auto& ratingsMap = cuisineRatings[cuisine];
-        auto it = ratingsMap.rbegin(); // highest rating
+        auto it = ratingsMap.rbegin(); 
         return *(it->second.begin()); // lex smallest food name
     }
 };
