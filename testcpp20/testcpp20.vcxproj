@@ -142,6 +142,7 @@
     <ClCompile Include="OldTestAndTemplate.ixx" />
     <ClCompile Include="parentModule.ixx" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SemaphoreTest.ixx" />
     <ClCompile Include="STDExecution.ixx" />
     <ClCompile Include="TestCalssInModule.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="VariantTest.ixx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="TestCalssInModule.h" />
     <ClInclude Include="TestTuple.h" />
   </ItemGroup>
