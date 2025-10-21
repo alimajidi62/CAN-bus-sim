@@ -14,6 +14,9 @@
 #include "TestTuple.h"
 //#include "FoodRating.h"
 #include "Rectangle.h"
+
+// Forward declaration for advanced smart pointer demonstrations
+void demonstrateAdvancedSmartPointers();
 using namespace std;
 import childmodule;
 import testIncpp;
@@ -191,7 +194,13 @@ int main()
     //foodRatings.changeRating("ramen", 16);
     //std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
 
-	cout << "\n\n\n\n" << "\033[1;34m ****** END ****** \033[0m \n";
+	cout << "\n\n\n\n" << "\033[1;34m ****** ADVANCED SMART POINTER DEMONSTRATIONS ****** \033[0m \n";
+	
+	// Call comprehensive smart pointer demonstrations
+	demonstrateAdvancedSmartPointers();
+	
+	cout << "\n" << "\033[1;34m ****** BASIC SMART POINTER EXAMPLES (Original) ****** \033[0m \n";
+	// Original simple examples (kept for comparison)
 	unique_ptr<Rectangle> P1 = make_unique<Rectangle>(10, 20);
 	cout << "Area of Rectangle is: " << P1->area() << endl;
 	unique_ptr<Rectangle> P2 = make_unique<Rectangle>();
@@ -204,5 +213,7 @@ int main()
 	Ps2 = Ps1;
 	std::cout << Ps1->area()<<"PS2"<<Ps2->area()<<endl;
 	cout << Ps1.use_count()<<endl;
+	
+	cout << "\n" << "\033[1;34m ****** END ****** \033[0m \n";
 	
 }
