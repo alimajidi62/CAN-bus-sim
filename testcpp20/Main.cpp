@@ -12,7 +12,8 @@
 #include <optional>
 #include <thread>
 #include "TestTuple.h"
-#include "FoodRating.cpp"
+//#include "FoodRating.h"
+#include "Rectangle.h"
 using namespace std;
 import childmodule;
 import testIncpp;
@@ -181,14 +182,27 @@ int main()
     std::vector<std::string> cuisines = {"korean", "japanese", "japanese", "greek", "japanese", "korean"};
     std::vector<int> ratings = {9, 12, 8, 15, 14, 7};
 
-    FoodRatings foodRatings(foods, cuisines, ratings);
+    //FoodRatings foodRatings(foods, cuisines, ratings);
 
-    std::cout << foodRatings.highestRated("korean") << std::endl;    // kimchi
-    std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
-    foodRatings.changeRating("sushi", 16);
-    std::cout << foodRatings.highestRated("japanese") << std::endl;  // sushi
-    foodRatings.changeRating("ramen", 16);
-    std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
+    //std::cout << foodRatings.highestRated("korean") << std::endl;    // kimchi
+    //std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
+    //foodRatings.changeRating("sushi", 16);
+    //std::cout << foodRatings.highestRated("japanese") << std::endl;  // sushi
+    //foodRatings.changeRating("ramen", 16);
+    //std::cout << foodRatings.highestRated("japanese") << std::endl;  // ramen
 
 	cout << "\n\n\n\n" << "\033[1;34m ****** END ****** \033[0m \n";
+	unique_ptr<Rectangle> P1 = make_unique<Rectangle>(10, 20);
+	cout << "Area of Rectangle is: " << P1->area() << endl;
+	unique_ptr<Rectangle> P2 = make_unique<Rectangle>();
+	P2 = move(P1);
+	cout << "Area of Rectangle is: " << P2->area() << endl;
+	//std::cout << P1->area();
+	shared_ptr<Rectangle> Ps1(new Rectangle(10, 20));
+	cout << Ps1->area()<<endl;
+	shared_ptr<Rectangle> Ps2;
+	Ps2 = Ps1;
+	std::cout << Ps1->area()<<"PS2"<<Ps2->area()<<endl;
+	cout << Ps1.use_count()<<endl;
+	
 }
