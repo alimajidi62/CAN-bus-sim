@@ -17,7 +17,8 @@ void demonstrateUniquePtr()
     // Transfer ownership
     auto rect2 = std::move(rect1);
     std::cout << "After move: rect1 is " << (rect1 ? "valid" : "null") << std::endl;
-    
+    std::cout << "rect1.get(): " << rect1.get() << std::endl;
+    std::cout << "rect1 is valid: " << (rect1?"valid":"null") << std::endl;
     if (rect2) {
         rect2->updateCoordinates(1, 1, 6, 6);
         rect2->printInfo();
