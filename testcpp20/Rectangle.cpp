@@ -146,6 +146,7 @@ void demonstrateRAIIAndExceptionSafety()
         std::cout << "Resources automatically cleaned up due to RAII" << std::endl;
     }
 }
+// this i sht e 
 void showUniqueVsShared()
 {
     std::cout << "\n=== unique_ptr demonstration ===" << std::endl;
@@ -167,6 +168,46 @@ void showUniqueVsShared()
     std::cout << "sp2 value: " << *sp2 << std::endl;
     std::cout << "sp3 value: " << *sp3 << std::endl;
 }
+// Function comparing unique_ptr, shared_ptr, and weak_ptr behaviors
+void compareSmartPointers()
+{
+    std::cout << "\n=== unique_ptr demonstration ===" << std::endl;
+    std::unique_ptr<int> up1 = std::make_unique<int>(100);
+    // std::unique_ptr<int> up2 = up1; // ERROR: cannot copy unique_ptr
+    std::unique_ptr<int> up2 = std::move(up1); // OK: move ownership
+    std::cout << "After move, up1 is " << (up1 ? "valid" : "null") << std::endl;
+    std::cout << "up2 value: " << *up2 << std::endl;
+
+    std::cout << "\n=== shared_ptr demonstration ===" << std::endl;
+    std::shared_ptr<int> sp1 = std::make_shared<int>(200);
+    std::shared_ptr<int> sp2 = sp1; // Copy: both share ownership
+    std::cout << "sp1 use_count: " << sp1.use_count() << std::endl;
+    std::cout << "sp2 use_count: " << sp2.use_count() << std::endl;
+    std::shared_ptr<int> sp3 = std::move(sp1); // Move: sp1 becomes null, sp2 and sp3 share
+    std::cout << "After move, sp1 is " << (sp1 ? "valid" : "null") << std::endl;
+    std::cout << "sp2 use_count: " << sp2.use_count() << std::endl;
+    std::cout << "sp3 use_count: " << sp3.use_count() << std::endl;
+
+    std::cout << "\n=== weak_ptr demonstration ===" << std::endl;
+    std::weak_ptr<int> wp1 = sp2; // weak_ptr observes, does not own
+    std::cout << "wp1 use_count (should match sp2): " << wp1.use_count() << std::endl;
+    if (auto locked = wp1.lock()) {
+        std::cout << "wp1.lock() succeeded, value: " << *locked << std::endl;
+    }
+    else {
+        std::cout << "wp1.lock() failed, object expired" << std::endl;
+    }
+	// Release shared_ptr owners and observe weak_ptr behavior 
+    sp2.reset(); // Release one owner
+    sp3.reset(); // Release last owner, object deleted
+    std::cout << "After resetting shared_ptrs, wp1 use_count: " << wp1.use_count() << std::endl;
+    if (auto locked = wp1.lock()) {
+        std::cout << "wp1.lock() succeeded, value: " << *locked << std::endl;
+    }
+    else {
+        std::cout << "wp1.lock() failed, object expired" << std::endl;
+    }
+}
 
 // Main demonstration function
 void demonstrateAdvancedSmartPointers()
@@ -178,6 +219,9 @@ void demonstrateAdvancedSmartPointers()
     demonstrateWeakPtr();
     demonstrateCustomDeleters();
     demonstrateRAIIAndExceptionSafety();
+    showUniqueVsShared();
+    compareSmartPointers();
+
     
     std::cout << "\n=== END OF DEMONSTRATIONS ===" << std::endl;
 }
