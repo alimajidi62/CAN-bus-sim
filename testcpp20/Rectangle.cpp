@@ -57,6 +57,13 @@ void demonstrateSharedPtr()
         rect3->printInfo();
         
         std::cout << "rect2 and rect3 going out of scope..." << std::endl;
+        std::cout << "After copying to rect2, use_count: " << rect1.use_count() << std::endl;
+        auto rect4= Rectangle::createSharedRectangle(7, 14, "SharedRect3");
+        rect4=std::move(rect2);
+        std::cout << "After move assignment:" << std::endl;
+        std::cout << "rect2 is " << (rect2 ? "valid" : "null") << std::endl;
+        std::cout << "rect4 use_count: " << rect4.use_count() << std::endl;
+        std::cout << "rect3 use_count: " << rect3.use_count() << std::endl;
     }
     
     std::cout << "After scope, rect1 use_count: " << rect1.use_count() << std::endl;
