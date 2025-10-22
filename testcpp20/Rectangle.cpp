@@ -146,6 +146,27 @@ void demonstrateRAIIAndExceptionSafety()
         std::cout << "Resources automatically cleaned up due to RAII" << std::endl;
     }
 }
+void showUniqueVsShared()
+{
+    std::cout << "\n=== unique_ptr demonstration ===" << std::endl;
+    std::unique_ptr<int> up1 = std::make_unique<int>(42);
+    // std::unique_ptr<int> up2 = up1; // ERROR: cannot copy unique_ptr
+    std::unique_ptr<int> up2 = std::move(up1); // OK: move ownership
+    std::cout << "After move, up1 is " << (up1 ? "valid" : "null") << std::endl;
+    std::cout << "up2 value: " << *up2 << std::endl;
+
+    std::cout << "\n=== shared_ptr demonstration ===" << std::endl;
+    std::shared_ptr<int> sp1 = std::make_shared<int>(99);
+    std::shared_ptr<int> sp2 = sp1; // OK: copy, both own the object
+    std::cout << "sp1 use_count: " << sp1.use_count() << std::endl;
+    std::cout << "sp2 use_count: " << sp2.use_count() << std::endl;
+    std::shared_ptr<int> sp3 = std::move(sp1); // move: sp1 becomes null
+    std::cout << "After move, sp1 is " << (sp1 ? "valid" : "null") << std::endl;
+    std::cout << "sp2 use_count: " << sp2.use_count() << std::endl;
+    std::cout << "sp3 use_count: " << sp3.use_count() << std::endl;
+    std::cout << "sp2 value: " << *sp2 << std::endl;
+    std::cout << "sp3 value: " << *sp3 << std::endl;
+}
 
 // Main demonstration function
 void demonstrateAdvancedSmartPointers()
