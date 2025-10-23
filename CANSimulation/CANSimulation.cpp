@@ -23,14 +23,14 @@ int main()
 	cout << "\nRunning Basic CAN Demo..." << endl;
 
 	// Run the basic CAN demo by default
-	//CANDemo::runBasicCANDemo();
+	CANDemo::runBasicCANDemo();
 	//CANDemo::IndustrialCANDemo::runFactoryAutomationDemo();
 
 	cout << "\n\033[1;33m ****** NEW: Simple Headlight Control Demo ****** \033[0m \n";
 	cout << "Running simple automotive headlight control scenario..." << endl;
 
 	// Run the new Headlight Control demo
-	CANDemo::runHeadlightDemo();
+	//CANDemo::runHeadlightDemo();
 
 	cout << "\n\033[1;33m ****** Adaptive Cruise Control (Currently Disabled) ****** \033[0m \n";
 	cout << "The cruise control demo is currently commented out due to speed control issues." << endl;
