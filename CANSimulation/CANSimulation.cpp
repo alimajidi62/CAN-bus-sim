@@ -29,7 +29,7 @@ int main()
 	cout << "\n\033[1;33m ****** NEW: Simple Headlight Control Demo ****** \033[0m \n";
 	cout << "Running simple automotive headlight control scenario..." << endl;
 
-	// Run the new Headlight Control demo
+	// Run the new Headlight Control demo is more complex   
 	//CANDemo::runHeadlightDemo();
 
 	cout << "\n\033[1;33m ****** Adaptive Cruise Control (Currently Disabled) ****** \033[0m \n";
